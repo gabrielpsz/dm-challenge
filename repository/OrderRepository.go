@@ -25,7 +25,7 @@ func InsertOrder(order *model.Order) error {
 		newProduct.Price = product.Price
 		newProduct.Quantity = product.GetOldProductQuantity() - product.Quantity
 		if (newProduct.Quantity < 0) {
-			message := fmt.Sprintf("A quantidade requisitada do produto %s está fora de estoque. Quantidade total disponível: %v", product.Name, product.GetOldProductQuantity())
+			message := fmt.Sprintf("The product %s is out of stock. Total quantity available: %v", product.Name, product.GetOldProductQuantity())
 			return errors.New(message)
 		} else {
 			UpdateProduct(product.ID.Hex(), &newProduct)
