@@ -19,3 +19,5 @@ Delivery Much backend project challenge.
 2. To run the project, you might do:
     - Just run **go run .** at the project root folder
     - Run **go build**, it will generate the binary file called **dm-challenge**, at the project root folder, and then execute this file
+    
+3. Its done, the server will run on port 8090.
