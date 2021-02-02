@@ -18,7 +18,8 @@ const (
 func GetProductByName(name string) ([]model.Product, error) {
 	var product model.Product
 	var products []model.Product
-	filterCursor, err := productsCollection.Find(ctx, bson.M{"name": name})
+	filter := bson.M{"name": bson.M{"$regex": "(?i)^"+name}}
+	filterCursor, err := productsCollection.Find(ctx, filter)
 	if err != nil {
 		log.Fatal(err)
 	}
