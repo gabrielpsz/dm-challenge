@@ -6,6 +6,7 @@ import (
 	"github.com/gabrielpsz/dm-challenge/repository"
 	"fmt"
 	"github.com/gorilla/mux"
+	"math"
 	"net/http"
 	"errors"
 )
@@ -41,6 +42,8 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, e.Error())
 		return
 	}
+	totalOrderPrice = math.Floor(totalOrderPrice*100)/100
+	fmt.Println(totalOrderPrice)
 	order := model.NewOrder(orderProducts, totalOrderPrice)
 
 	if err := repository.InsertOrder(order); err != nil {
