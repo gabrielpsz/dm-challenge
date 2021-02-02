@@ -8,10 +8,12 @@ import (
 
 func GetByName(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	product, err := repository.GetProductByName(params["name"])
-	if err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid Product Name")
+	name := params["name"]
+	products, err := repository.GetProductByNameLike(name)
+	if len(products) == 0 || err != nil {
+		respondWithError(w, http.StatusBadRequest, "Product with name" +name+" wasnt found")
 		return
 	}
-	respondWithJson(w, http.StatusOK, product)
+
+	respondWithJson(w, http.StatusOK, products)
 }

@@ -18,6 +18,26 @@ const (
 func GetProductByName(name string) ([]model.Product, error) {
 	var product model.Product
 	var products []model.Product
+	filter := bson.M{"name": name}
+	filterCursor, err := productsCollection.Find(ctx, filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var productsFiltered []bson.M
+	if err = filterCursor.All(ctx, &productsFiltered); err != nil {
+		log.Fatal(err)
+	}
+	for _, productFiltered := range productsFiltered {
+		bsonBytes, _ := bson.Marshal(productFiltered)
+		bson.Unmarshal(bsonBytes, &product)
+		products = append(products, product)
+	}
+	return products, err
+}
+
+func GetProductByNameLike(name string) ([]model.Product, error) {
+	var product model.Product
+	var products []model.Product
 	filter := bson.M{"name": bson.M{"$regex": "(?i)^"+name}}
 	filterCursor, err := productsCollection.Find(ctx, filter)
 	if err != nil {
@@ -32,7 +52,6 @@ func GetProductByName(name string) ([]model.Product, error) {
 		bson.Unmarshal(bsonBytes, &product)
 		products = append(products, product)
 	}
-
 	return products, err
 }
 
