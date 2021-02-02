@@ -7,6 +7,7 @@ import (
 
 func main() {
 	repository.StartDatabase();
+	go router.StartRouter()
 	internal.StartQueue()
 }
 
