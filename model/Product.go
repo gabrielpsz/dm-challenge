@@ -4,9 +4,9 @@ import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type Product struct {
 	ID          primitive.ObjectID `bson:"_id" json:"id"`
-	Name string
-	Price float64
-	Quantity int
+	Name string `json:"name"`
+	Price float64 `json:"price"`
+	Quantity int `json:"quantity"`
 	oldProductQuantity int
 }
 

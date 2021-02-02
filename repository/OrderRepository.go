@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"context"
 	"errors"
 	"github.com/gabrielpsz/dm-challenge/model"
 	"fmt"
@@ -49,4 +50,22 @@ func GetOrderById(id string) (model.Order) {
 	bsonBytes, _ := bson.Marshal(orderModel)
 	bson.Unmarshal(bsonBytes, &order)
 	return order
+}
+
+func GetOrders() ([]model.Order) {
+	var orders []model.Order
+	cursor, err := ordersCollection.Find(ctx, bson.M{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for cursor.Next(context.TODO()) {
+		var order model.Order
+		err := cursor.Decode(&order)
+		if err != nil {
+			log.Fatal(err)
+		}
+		orders = append(orders, order)
+
+	}
+	return orders
 }

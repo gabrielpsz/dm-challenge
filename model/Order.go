@@ -1,8 +1,11 @@
 package model
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type Order struct {
-	Products []Product
-	Total float64
+	ID          primitive.ObjectID `bson:"_id" json:"id"`
+	Products []Product `json:"products"`
+	Total float64 `json:"total"`
 }
 
 func NewOrder(products []Product, total float64) *Order {
