@@ -58,5 +58,6 @@ func GetById(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAll(w http.ResponseWriter, r *http.Request) {
-
+	product := repository.GetOrders()
+	respondWithJson(w, http.StatusOK, product)
 }
