@@ -1,10 +1,8 @@
-# dm-challenge
-
-DM challenge project
-=======
 # DM-Challenge
 
-Delivery Much backend project challenge.
+Delivery Much backend project challenge
+
+A simple project management could be found [**HERE**](https://share.clickup.com/b/h/6-11583041-2/797221204156107)
 
 ### How to run:
 1. After clone the project, just run **docker-compose up -d**
