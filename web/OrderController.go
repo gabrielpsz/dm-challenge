@@ -52,9 +52,15 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 
 func GetById(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	product := repository.GetOrderById(params["id"])
-
-	respondWithJson(w, http.StatusOK, product)
+	id := params["id"]
+	order := repository.GetOrderById(id)
+	if (len(order.Products) == 0) {
+		message := fmt.Sprintf("Order with id %v not found", id)
+		e := errors.New(message)
+		respondWithError(w, http.StatusInternalServerError, e.Error())
+		return
+	}
+	respondWithJson(w, http.StatusOK, order)
 }
 
 func GetAll(w http.ResponseWriter, r *http.Request) {

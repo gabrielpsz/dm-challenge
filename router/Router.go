@@ -14,7 +14,7 @@ func StartRouter() {
 	r.HandleFunc("/api/v1/products/{name}", web.GetByName).Methods("GET")
 	r.HandleFunc("/api/v1/orders", web.Insert).Methods("POST")
 	r.HandleFunc("/api/v1/orders", web.GetAll).Methods("GET")
-	//r.HandleFunc("/api/v1/orders/{id}", web.GetById).Methods("GET")
+	r.HandleFunc("/api/v1/orders/{id}", web.GetById).Methods("GET")
 
 	var port = ":8090"
 	fmt.Println("Server running in port:", port)

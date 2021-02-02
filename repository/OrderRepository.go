@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/gabrielpsz/dm-challenge/model"
 	"fmt"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -44,9 +45,9 @@ func InsertOrder(order *model.Order) error {
 func GetOrderById(id string) (model.Order) {
 	var order model.Order
 	var orderModel bson.M
-	if err := ordersCollection.FindOne(ctx, bson.M{"_id": id}).Decode(&orderModel); err != nil {
-		log.Fatal(err)
-	}
+	modelId, _ := primitive.ObjectIDFromHex(id)
+	err := ordersCollection.FindOne(ctx, bson.M{"_id": modelId}).Decode(&orderModel)
+	if err != nil { return order }
 	bsonBytes, _ := bson.Marshal(orderModel)
 	bson.Unmarshal(bsonBytes, &order)
 	return order
