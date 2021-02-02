@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # dm-challenge
 
 DM challenge project
