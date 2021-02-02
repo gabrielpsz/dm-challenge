@@ -36,7 +36,7 @@ func GetProductByName(name string) ([]model.Product, error) {
 }
 
 func InsertProduct(product *model.Product) {
-
+	product.ID = primitive.NewObjectID()
 	insertResult, err := productsCollection.InsertOne(ctx, product)
 
 	if err != nil {

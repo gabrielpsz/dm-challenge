@@ -9,6 +9,6 @@ type Order struct {
 }
 
 func NewOrder(products []Product, total float64) *Order {
-	o := Order{Products: products, Total: total}
+	o := Order{ID: primitive.NewObjectID(), Products: products, Total: total}
 	return &o
 }
