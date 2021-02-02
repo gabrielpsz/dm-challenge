@@ -33,29 +33,29 @@ func StartQueue() {
 func createQueue(err error, queueName, routingKey, exchangeName string) (<-chan amqp.Delivery, error) {
 	ch, err := amqpConnection.Channel()
 	queue, err := ch.QueueDeclare(
-		queueName, // name
-		false,       // durable
-		false,       // delete when unused
-		true,        // exclusive
-		false,       // no-wait
-		nil,         // arguments
+		queueName,
+		false,
+		false,
+		true,
+		false,
+		nil,
 	)
 	failOnError(err, "Failed to declare a queue")
 	err = ch.QueueBind(
-		queue.Name,    // queue name
-		routingKey, // routing key
-		exchangeName,       // exchange
+		queue.Name,
+		routingKey,
+		exchangeName,
 		false,
 		nil)
 	failOnError(err, "Failed to bind a queue")
 	msgs, err := ch.Consume(
-		queue.Name, // queue
-		"",         // consumer
-		true,       // auto ack
-		false,      // exclusive
-		false,      // no local
-		false,      // no wait
-		nil,        // args
+		queue.Name,
+		"",
+		true,
+		false,
+		false,
+		false,
+		nil,
 	)
 	failOnError(err, "Failed to register a consumer")
 	return msgs, err
