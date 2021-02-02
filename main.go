@@ -6,6 +6,6 @@ import (
 
 func main() {
 	repository.StartDatabase();
-
+	internal.StartQueue()
 }
 
