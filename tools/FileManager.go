@@ -16,7 +16,6 @@ func ReadData(fileName string) ([][]string, error) {
 
 	r := csv.NewReader(f)
 
-	// skip first line
 	if _, err := r.Read(); err != nil {
 		return [][]string{}, err
 	}
